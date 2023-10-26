@@ -124,15 +124,34 @@ var cars =[
 ];
 
 //checks if a rectange and a square are overlapping on the canvas 
+// Detect collisions
 function detectCollision() {
+    // Iterate over each car
     cars.forEach(function (car) {
-        if (car.x <= x + width && car.x <= x + squareWidth && car.x + squareWidth >= x && car.y + squareHeight >= y && car.y < y + squareHeight){
+        // Define the player's edges
+        const playerLeft = x;
+        const playerRight = x + width;
+        const playerTop = y;
+        const playerBottom = y + height;
+
+        // Define the car's edges
+        const carLeft = car.x;
+        const carRight = car.x + car.z; // Assuming car.z is the car's width
+        const carTop = car.y;
+        const carBottom = car.y + 25; // Assuming 25 is the car's height
+
+        // Check if the car and the player overlap
+        const collisionX = carLeft < playerRight && carRight > playerLeft;
+        const collisionY = carTop < playerBottom && carBottom > playerTop;
+
+        // If the car and the player overlap, the player has collided with the car
+        if (collisionX && collisionY) {
+            // Reset the score
             score = 0;
-            cars.length =1;
+            cars.length = 1;
             document.getElementById("score").innerHTML = score;
             y = 488;
         }
-        
     });
 }
 
