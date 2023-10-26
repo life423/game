@@ -193,13 +193,24 @@ function displaySquares() {
 }
 
 function addCar() {
+  const occupiedLanes = new Set(cars.map((car) => car.lane));
+  let availableLanes = [...Array(NUM_LANES).keys()].filter(
+    (lane) => !occupiedLanes.has(lane)
+  );
+
+  if (availableLanes.length === 0) {
+    // All lanes are occupied, can't add a new car
+    return;
+  }
+
+  const lane =
+    availableLanes[Math.floor(Math.random() * availableLanes.length)];
+
   if (score <= 2) {
-    const lane = Math.floor(Math.random() * NUM_LANES);
     cars.push(new Car(randomIntFromInterval(40, 100), lane));
   }
 
   if (score % 4 === 0) {
-    const lane = Math.floor(Math.random() * NUM_LANES);
     cars.push(new Car(randomIntFromInterval(40, 100), lane));
   }
 }
@@ -222,8 +233,15 @@ function animate() {
   checkForWinner();
 }
 
+const startGame = () => {
+  // Add code to start the game
+}
+animate();
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
-animate();
+
+
+document.getElementById("startButton").addEventListener("click", startGame);
+
