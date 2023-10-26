@@ -25,6 +25,9 @@ const LANE_HEIGHT = canvas.height / NUM_LANES;
 const squareWidth = 20;
 const squareHeight = 20;
 
+const carColor = "#f3941e";
+const squareColor = "#28b42f";
+
 
 const keyDownHandler = (e) => {
   const { keyCode } = e;
@@ -100,7 +103,7 @@ function moveFrong() {
 function drawSqaure() {
   ctx.beginPath();
   ctx.rect(x, y, 20, 20);
-  ctx.fillStyle = "white";
+  ctx.fillStyle = squareColor;
   ctx.fill();
 }
 
@@ -124,7 +127,7 @@ class Car {
   draw() {
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, 25);
-    ctx.fillStyle = "#1FF2F2";
+    ctx.fillStyle = carColor;
     ctx.fill();
   }
 
@@ -155,7 +158,7 @@ function detectCollision() {
     const playerBottom = y + height;
 
     const carLeft = car.x;
-    const carRight = car.x + car.z;
+    const carRight = car.x + car.width; // Use car.width instead of car.z
     const carTop = car.y;
     const carBottom = car.y + 25;
 
