@@ -195,7 +195,8 @@ function displaySquares() {
 function addCar() {
   const occupiedLanes = new Set(cars.map((car) => car.lane));
   let availableLanes = [...Array(NUM_LANES).keys()].filter(
-    (lane) => !occupiedLanes.has(lane)
+    (lane) =>
+      !occupiedLanes.has(lane) && lane * LANE_HEIGHT < canvas.height - 100
   );
 
   if (availableLanes.length === 0) {
