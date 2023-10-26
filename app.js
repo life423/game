@@ -89,32 +89,26 @@ function drawSqaure() {
 
 //class to produce each square
 class Car {
-    
-    constructor(x, y, z)
-    {
+    constructor(x, y, width) {
         this.x = x;
         this.y = y;
-        this.z = z;
-    }
-    
-    // method which draws the blue rectangles
-    draw(){
-    ctx.beginPath();
-    ctx.rect(this.x, this.y, this.z, 25);
-    ctx.fillStyle = "#1FF2F2";
-    ctx.fill();
+        this.width = width;
+        this.speed = Math.random() * 2 + 1; // Assign a constant speed between 1 and 3
     }
 
-    //method which causes the rectanges to move across the screen to the right
-    update(){
-        if (this.x < canvas.width) {
-            this.x += Math.floor(Math.random() * 7) + 1+ (score/5);
-        }
-        else {
-            this.x = -100;
+    draw() {
+        ctx.beginPath();
+        ctx.rect(this.x, this.y, this.width, 25);
+        ctx.fillStyle = "#1FF2F2";
+        ctx.fill();
+    }
+
+    update() {
+        this.x += this.speed; // Use the constant speed to update the position
+        if (this.x > canvas.width) {
+            this.x = -this.width; // Reset the position to the left edge when the car goes off the right edge
         }
         this.draw();
-
     }
 }
 
